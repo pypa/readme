@@ -34,10 +34,12 @@ try:
     from cmarkgfm.cmark import Options as cmarkgfmOptions
     variants: Dict[str, Callable[[str], str]] = {
         "GFM": lambda raw: cast(str, cmarkgfm.github_flavored_markdown_to_html(
-            raw, options=cmarkgfmOptions.CMARK_OPT_UNSAFE
+            raw, options=(
+                cmarkgfmOptions.CMARK_OPT_UNSAFE | cmarkgfmOptions.CMARK_OPT_FOOTNOTES)
         )),
         "CommonMark": lambda raw: cast(str, cmarkgfm.markdown_to_html(
-            raw, options=cmarkgfmOptions.CMARK_OPT_UNSAFE
+            raw, options=(
+                cmarkgfmOptions.CMARK_OPT_UNSAFE | cmarkgfmOptions.CMARK_OPT_FOOTNOTES)
         )),
     }
 except ImportError:
