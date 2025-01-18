@@ -44,12 +44,6 @@ except ImportError:
     warnings.warn(_EXTRA_WARNING)
     variants = {}
 
-# Make code fences with `python` as the language default to highlighting as
-# Python 3.
-_LANG_ALIASES = {
-    'python': 'python3',
-}
-
 
 def render(
     raw: str,
@@ -101,7 +95,6 @@ def _highlight(html: str) -> str:
     def replacer(match: Match[Any]) -> str:
         try:
             lang = match.group('lang')
-            lang = _LANG_ALIASES.get(lang, lang)
             lexer = pygments.lexers.get_lexer_by_name(lang)
         except ValueError:
             lexer = pygments.lexers.TextLexer()
